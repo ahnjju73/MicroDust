@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MicroDust</string>
+    <string name="best">좋음</string>
+    <string name="good">양호</string>
+    <string name="normal">보통</string>
+    <string name="bad">나쁨</string>
+    <string name="worst">최악</string>
+    <string-array name="status_name">
+        <item>@string/best</item>
+        <item>@string/good</item>
+        <item>@string/normal</item>
+        <item>@string/bad</item>
+        <item>@string/worst</item>
+    </string-array>
+</resources>
