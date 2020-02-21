@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_emoji_2" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../emoji-2.svg" />
+                            <entry key="outputName" value="ic_worst_status" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../emoji-4.svg" />
                           </map>
                         </option>
                       </PersistentState>

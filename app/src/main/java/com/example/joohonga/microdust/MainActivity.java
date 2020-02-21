@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -352,18 +353,18 @@ public class MainActivity extends AppCompatActivity
                         status.setText("양호");
                         break;
                     case 3:
-                        statusImage.setImageResource(R.drawable.ic_launcher_foreground);
-                        constraintLayout.setBackgroundResource(R.color.bestStatus);
+                        statusImage.setImageResource(R.drawable.ic_normal_status);
+                        constraintLayout.setBackgroundResource(R.color.sosoStatus);
                         status.setText("보통");
                         break;
                     case 4:
-                        statusImage.setImageResource(R.drawable.ic_launcher_foreground);
-                        constraintLayout.setBackgroundResource(R.color.bestStatus);
+                        statusImage.setImageResource(R.drawable.ic_sad);
+                        constraintLayout.setBackgroundResource(R.color.badStatus);
                         status.setText("나쁨");
                         break;
                     case 5:
-                        statusImage.setImageResource(R.drawable.ic_launcher_foreground);
-                        constraintLayout.setBackgroundResource(R.color.bestStatus);
+                        statusImage.setImageResource(R.drawable.ic_worst_status);
+                        constraintLayout.setBackgroundResource(R.color.worstStatus);
                         status.setText("최악");
                         break;
                 }
