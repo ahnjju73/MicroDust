@@ -1,8 +1,10 @@
 package com.example.joohonga.microdust;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -19,9 +21,11 @@ import androidx.core.content.ContextCompat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +43,8 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -72,11 +78,28 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = new Intent(this, LoadingActivity.class);
+        startActivity(intent);
         setContentView(R.layout.activity_main);
         TextView tv = findViewById(R.id.address_textview);
         statusImage = findViewById(R.id.microdust_status_img);
         constraintLayout = findViewById(R.id.main_background);
         status = findViewById(R.id.status_textview);
+        Button addAddressBtn = findViewById(R.id.search_address_btn);
+        Button removeAddressBtn = findViewById(R.id.erase_address_btn);
+        removeAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeAddress();
+            }
+        });
+        addAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getApplicationContext(), SeachingAddressActivity.class);
+                startActivity(intent1);
+            }
+        });
 
         Animation a = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sample_animation);
         statusImage.setAnimation(a);
@@ -111,6 +134,16 @@ public class MainActivity extends AppCompatActivity
         tv.setText(address);
 
 
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        java.util.List<String> savedAddresses = readAddressesFromSP();
+        for(String a: savedAddresses){
+            System.out.println(a);
+        }
     }
 
 
@@ -270,8 +303,8 @@ public class MainActivity extends AppCompatActivity
         try {
 
             addresses = geocoder.getFromLocation(
-                    37.5782,
-                    126.8946,
+                    latitude,
+                    longitude,
                     7);
         } catch (IOException ioException) {
             //네트워크 문제
@@ -404,6 +437,21 @@ public class MainActivity extends AppCompatActivity
     private String parseAddress(String add){
         String[] address = add.split(" ");
         return address[2] + " " + address[3];
+    }
+
+    private java.util.List<String> readAddressesFromSP(){
+        SharedPreferences sp = this.getSharedPreferences("addresses", Context.MODE_PRIVATE);
+        String addresses = sp.getString("add", "");
+        if(!addresses.isEmpty()){
+            java.util.List<String> addes = Arrays.asList(addresses.split(" /// "));
+            return addes;
+        }
+        else
+            return new ArrayList<String>();
+
+    }
+    private void removeAddress() {
+
     }
 
 
